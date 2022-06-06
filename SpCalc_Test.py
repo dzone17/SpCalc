@@ -2,22 +2,21 @@
 Test Application
 """
 import pytest
-
 import SpCalc
 
-
 # patching
-def test_special_calc(mocker):
+def test_special_calc(mocker, specimen_value):
     """Special Calculator Test"""
     mock_now = mocker.patch("SpCalc.random")
     mock_now.randint.return_value = 2
-    specimen = 6
+    specimen = specimen_value
     output = SpCalc.special_calc(specimen)
-    expected = specimen + 2
+    expected = specimen_value + 2
 
     assert expected == output
 
-#parametrized patching
+
+# parametrized patching
 @pytest.mark.parametrize(
     "rand, expect",
     [
@@ -30,11 +29,11 @@ def test_special_calc(mocker):
         (12, 18),
     ],
 )
-def test_get_time_of_day(rand, expect, mocker):
+def test_get_time_of_day(rand, expect,  mocker, specimen_value):
     """Special Calculator Test"""
     mock_now = mocker.patch("SpCalc.random")
     mock_now.randint.return_value = rand
-    specimen = 6
+    specimen = specimen_value
     output = SpCalc.special_calc(specimen)
     expected = specimen + rand
 
